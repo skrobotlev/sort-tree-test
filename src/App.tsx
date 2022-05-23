@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import './App.css';
 import DetailInfo from './components/detail-info';
 import Tree from './components/sortable-tree';
 import { useStore } from './store';
@@ -25,12 +24,9 @@ const GridDiv = styled.div`
   "tree info"
   ". buttons"
 ;
-`
-
-
+`;
 
 const App: React.FC = observer(() => {
-  const { store } = useStore();
 
   return (
     <AppDiv>

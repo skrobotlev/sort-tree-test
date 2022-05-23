@@ -12,8 +12,15 @@ interface DetailInfoI {
 const DetailInfoDiv = styled.div`
     grid-area: info;
     display: flex;
+    margin-top: 10px;
     flex-direction: column;
     width: 400px;
+    border: 1px solid teal;
+    height: 80vh;
+    h1, h2 {
+        margin-left: 10px;
+
+    }
     `;
 
 const DetailInfoField = styled.h1`

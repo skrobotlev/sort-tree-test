@@ -9,7 +9,13 @@ const TreeDiv = styled.div`
   grid-area: tree;
 `;
 
+const SelectButton = styled.button`
+    cursor: pointer;
+    background-color: aliceblue;
+`
+
 const ActionButton = styled.button`
+cursor: pointer;
   width: 80px;
   height: 35px;
   background-color: aliceblue;
@@ -30,17 +36,14 @@ const Tree: FC = observer(() => {
     const [data, setData] = useState<TreeNode[]>([]);
     const { store } = useStore();
 
-    const getNodeKey = ({ node: { id } }: any) => id;
 
     const removeNode = (rowInfo: any) => {
         let { treeIndex, path, node } = rowInfo;
-        console.log(path)
         setData(
             removeNodeAtPath({
                 treeData: data,
                 path,
                 getNodeKey: ({ treeIndex }) => {
-                    console.log(treeIndex, 'nmb')
                     return treeIndex;
                 },
                 ignoreCollapsed: true,
@@ -65,7 +68,6 @@ const Tree: FC = observer(() => {
             }
         })
         let per = getTreeFromFlatData({ flatData: mapping, rootKey: -1 });
-        console.log(per, "resp")
         setData(getTreeFromFlatData({ flatData: mapping, rootKey: -1 }))
     }
 
@@ -73,34 +75,7 @@ const Tree: FC = observer(() => {
         getGists()
     }, [])
     return (
-        <TreeDiv style={{ height: 600, width: 400 }}>
-            {/* <SortableTree
-                treeData={data}
-                onChange={treeData => setData(treeData)}
-                generateNodeProps={(row) => {
-                    // console.log(row)
-                    store.gistForDel = row;
-                    return {
-                        title: row.node.title,
-                        subtitle: (
-                            <div style={{ lineHeight: "2em" }}>{row.node.subtitle}</div>
-                        ),
-                        buttons: [
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    store.gistForDel = row;
-                                    store.actualGist = row.node;
-                                    removeNode(data)
-                                    console.log(store.actualGist, store.gistForDel)
-                                }}
-                            >
-                                ℹ
-                            </button>
-                        ]
-                    };
-                }}
-            /> */}
+        <TreeDiv style={{ height: "80vh", width: 400, margin: "10px", border: "1px solid teal" }}>
 
             <SortableTree
                 treeData={data}
@@ -108,13 +83,12 @@ const Tree: FC = observer(() => {
                 generateNodeProps={(rowInfo) => ({
                     buttons: [
                         <div>
-                            <button onClick={(event) => {
-                                console.log(rowInfo, 'inf')
+                            <SelectButton onClick={(event) => {
                                 store.actualGist = rowInfo.node;
                                 store.gistForDel = rowInfo;
                             }}>
                                 Select
-                            </button>
+                            </SelectButton>
                         </div>
                     ],
                     style: {
@@ -122,12 +96,12 @@ const Tree: FC = observer(() => {
                     }
                 })}
             />
-            <ButtonsDiv>
+            < ButtonsDiv >
                 <ActionButton onClick={() => removeNode(store.gistForDel)}>Delete</ActionButton>
                 <ActionButton onClick={() => getGists()}>Refresh</ActionButton>
                 <ActionButton onClick={() => console.log(data)}>Apply</ActionButton>
-            </ButtonsDiv>
-        </TreeDiv>
+            </ButtonsDiv >
+        </TreeDiv >
 
     )
 })
