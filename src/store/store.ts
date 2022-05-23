@@ -2,14 +2,16 @@ import { makeAutoObservable } from "mobx";
 
 export default class Store {
   private _fetchData: Object[];
-  public _actualGist: any;
-  _fetchGists: Object;
+  private _actualGist: any;
+  private _fetchGists: Object;
+  private _gistForDel: Object;
 
   constructor() {
     makeAutoObservable(this);
     this._fetchData = [];
     this._actualGist = {};
     this._fetchGists = {};
+    this._gistForDel = {};
   }
 
   deleteItem = () => {
@@ -34,10 +36,17 @@ export default class Store {
   get actualGist() {
     return this._actualGist;
   }
+
   set fetchGists(val) {
     this._fetchGists = val;
   }
   get fetchGists() {
     return this._fetchGists;
+  }
+  set gistForDel(val) {
+    this._gistForDel = val;
+  }
+  get gistForDel() {
+    return this._gistForDel;
   }
 }

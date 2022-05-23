@@ -12,7 +12,6 @@ interface DetailInfoI {
 const DetailInfoDiv = styled.div`
     grid-area: info;
     display: flex;
-    /* justify-content: space-between; */
     flex-direction: column;
     width: 400px;
     `;
